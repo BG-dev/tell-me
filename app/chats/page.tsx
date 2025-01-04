@@ -1,3 +1,7 @@
 export default function Page() {
-  return <div>My chats</div>;
+  return (
+    <div>
+      <p>My Chats</p>
+    </div>
+  );
 }
