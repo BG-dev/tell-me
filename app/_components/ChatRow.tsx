@@ -8,6 +8,8 @@ interface ChatRowProps {
 }
 
 export default function ChatRow({ chatPreview, isLast }: ChatRowProps) {
+  const lastMessage = chatPreview.lastMessage;
+
   return (
     <Link
       key={chatPreview.id}
@@ -21,8 +23,8 @@ export default function ChatRow({ chatPreview, isLast }: ChatRowProps) {
     >
       <span>{chatPreview.name}</span>
       <div className="flex justify-between">
-        <p>{chatPreview.lastMessage?.content}</p>
-        <p>{chatPreview.lastMessage?.timestamp.getUTCDate()}</p>
+        <p>{lastMessage ? lastMessage.content : ""}</p>
+        <p>{lastMessage ? lastMessage.timestamp.toDateString() : ""}</p>
       </div>
     </Link>
   );
