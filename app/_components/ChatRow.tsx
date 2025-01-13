@@ -1,22 +1,29 @@
 import clsx from "clsx";
-import { Chat } from "../_types/chat";
+import { Chat, ChatPreview } from "../_types/chat";
 import Link from "next/link";
 
 interface ChatRowProps {
-  chat: Chat;
+  chatPreview: ChatPreview;
   isLast: boolean;
 }
 
-export default function ChatRow({ chat, isLast }: ChatRowProps) {
+export default function ChatRow({ chatPreview, isLast }: ChatRowProps) {
   return (
     <Link
-      key={chat.id}
-      className={clsx("flex h-12 p-1 border border-gray-500", {
-        "border-b-0": !isLast,
-      })}
-      href={`/chats/${chat.id}`}
+      key={chatPreview.id}
+      className={clsx(
+        "flex flex-col justify-between h-18 p-2 border border-gray-500",
+        {
+          "border-b-0": !isLast,
+        }
+      )}
+      href={`/chats/${chatPreview.id}`}
     >
-      <span>{chat.name}</span>
+      <span>{chatPreview.name}</span>
+      <div className="flex justify-between">
+        <p>{chatPreview.lastMessage?.content}</p>
+        <p>{chatPreview.lastMessage?.timestamp.getUTCDate()}</p>
+      </div>
     </Link>
   );
 }
